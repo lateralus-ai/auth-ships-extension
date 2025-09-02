@@ -120,9 +120,13 @@ public class ShipResourceProvider implements RealmResourceProvider {
         try {
             ShipService shipService = new ShipService(session);
             shipService.assignUserToShip(userId, shipId);
-            return Response.ok(Map.of("message", "User assigned to ship successfully")).build();
+            return Response.ok(Map.of("message", "User assigned to ship successfully"))
+                .type(MediaType.APPLICATION_JSON)
+                .build();
         } catch (Exception e) {
-            return Response.serverError().entity(Map.of("error", e.getMessage())).build();
+            return Response.serverError().entity(Map.of("error", e.getMessage()))
+                .type(MediaType.APPLICATION_JSON)
+                .build();
         }
     }
     
