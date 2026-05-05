@@ -30,7 +30,7 @@ console.log('🔥 Document ready state:', document.readyState);
     }
     
     // Try to load the actual Lottie file - adjust path for Keycloak resources
-    const lottieUrl = '/resources/j3qk5/login/askchief/img/Chief Demo v4 LOT.lottie';
+    const lottieUrl = (window.KC_RESOURCES_PATH || '') + '/img/Chief Demo v4 LOT.lottie';
     
     // Function to load Lottie via CDN if available
     function loadLottieAnimation() {

@@ -1,5 +1,7 @@
 <#import "template.ftl" as layout>
 
+<script>window.KC_RESOURCES_PATH = '${url.resourcesPath}';</script>
+
 <!-- Ask Chief Lottie Animation - positioned above everything -->
 <div class="kc-lottie-container-header">
     <div class="kc-lottie-container">
