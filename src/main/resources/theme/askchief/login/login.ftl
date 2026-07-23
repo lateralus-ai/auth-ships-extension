@@ -6,7 +6,6 @@
             <div class="kc-header-logo">
                 <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
             </div>
-            <p>AI-Powered Shipping Intelligence Platform</p>
         </div>
     <#elseif section = "form">
     <div class="kc-welcome-back">
