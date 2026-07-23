@@ -1,108 +1,51 @@
-/* Ask Chief Theme for Keycloak Login */
+/* Ask Chief Theme for Keycloak Login — rebrand: cream wordmark on charcoal */
 
-/* Import Work Sans font to match Ask Chief branding */
+/* Work Sans to match Ask Chief branding */
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 
-/* Tailwind CDN was imported here previously, but it's JS and blocked by CSP. */
-/* Removed to avoid broken CSS and CSP issues. */
-
-/* Ask Chief Color Variables */
+/* Brand tokens (sampled from the official askchief.ai mark) */
 :root {
-  --white: #fff;
-  --black: #000;
-  --gray-20: #ececf1;
-  --gray-50: #f7f7f8;
-  --gray-100: #ececec;
-  --gray-200: #e3e3e3;
-  --gray-300: #cdcdcd;
-  --gray-400: #999696;
-  --gray-500: #595959;
-  --gray-600: #424242;
-  --gray-700: #2f2f2f;
-  --gray-800: #212121;
-  --gray-850: #171717;
-  --gray-900: #0d0d0d;
-  --green-50: #ecfdf5;
-  --green-100: #d1fae5;
-  --green-200: #a7f3d0;
-  --green-300: #6ee7b7;
-  --green-400: #34d399;
-  --green-500: #2cdb87;
-  --green-600: #059669;
-  --green-700: #047857;
-  --green-800: #065f46;
-  --green-900: #064e3b;
-  --green-950: #022c22;
-  
-  /* Ask Chief Semantic Colors */
-  --presentation: var(--white);
-  --text-primary: var(--gray-800);
-  --text-secondary: var(--gray-600);
-  --text-tertiary: var(--gray-500);
-  --surface-primary: var(--white);
-  --surface-secondary: #e9ebea;
-  --surface-tertiary: var(--gray-100);
-  --surface-submit: var(--green-500);
-  --border-light: var(--gray-200);
-  --border-medium: var(--gray-300);
-  --border-heavy: var(--gray-400);
+  --charcoal: #232323;          /* page background */
+  --charcoal-elevated: #2c2b28; /* input / raised surfaces */
+  --cream: #f7f6ed;             /* primary text + logo */
+  --cream-muted: rgba(247, 246, 237, 0.64);
+  --cream-faint: rgba(247, 246, 237, 0.14);
+
+  --text-primary: var(--cream);
+  --text-secondary: var(--cream-muted);
+  --surface-input: var(--charcoal-elevated);
+  --surface-submit: var(--cream);
 }
 
-/* Dark mode colors (for future use) */
-.dark {
-  --presentation: var(--gray-800);
-  --text-primary: var(--gray-100);
-  --text-secondary: var(--gray-300);
-  --text-tertiary: var(--gray-500);
-  --surface-primary: var(--gray-900);
-  --surface-secondary: var(--gray-800);
-  --surface-tertiary: var(--gray-700);
-  --surface-submit: var(--green-600);
-  --border-light: var(--gray-700);
-  --border-medium: var(--gray-600);
-  --border-heavy: var(--gray-500);
-}
-
-/* Global Styles */
+/* Global */
 * {
-  font-family: 'Work Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-body {
-  background: radial-gradient(
-    146.64% 140% at 48.08% -12.92%,
-    #2cdb87 13.45%,
-    #ebebeb 40.89%,
-    #ebebeb 90.49%
-  );
+body,
+.login-pf body {
+  /* Charcoal with a subtle top-center lift for depth */
+  background: radial-gradient(120% 120% at 50% -10%, #2b2a27 0%, var(--charcoal) 45%);
   color: var(--text-primary);
-  font-family: 'Work Sans', 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
 
-/* Login Container */
 .login-pf {
   background: transparent;
 }
 
-.login-pf body {
-  background: radial-gradient(
-    146.64% 140% at 48.08% -12.92%,
-    #2cdb87 13.45%,
-    #ebebeb 40.89%,
-    #ebebeb 90.49%
-  );
-}
-
 .login-pf .container {
-  padding-top: 5vh;
+  padding-top: 6vh;
 }
 
-/* Card Styling */
+.login-pf-page {
+  padding-top: 0;
+}
+
+/* Card — transparent, no chrome */
 .card-pf {
-  background-color: transparent;
   background: transparent;
   border: none;
   border-radius: 0;
@@ -118,365 +61,38 @@ body {
   text-align: center;
 }
 
-.card-pf .card-pf-title {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
 .login-pf-page .card-pf p {
-  color: black;
+  color: var(--text-secondary);
 }
 
-/* Logo */
-#kc-logo {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-#kc-logo-wrapper {
-  background-image: none;
-  width: auto;
-  height: auto;
-  margin: 0 auto 1rem;
-}
-
-/* Hide default Keycloak branding */
-#kc-header-wrapper .kc-logo-text {
-  background-image: none !important;
-  height: auto !important;
-  width: auto !important;
-  margin: 0 !important;
-  text-indent: 0 !important;
-  overflow: visible !important;
-  font-size: 0 !important;
+/* Hide stock Keycloak header/branding */
+#kc-header-wrapper,
+.login-pf-header h1 {
   display: none !important;
 }
 
-#kc-header-wrapper {
-  display: none !important;
-}
-
-/* Hide any Keycloak logo elements */
+.kc-logo-text,
 .kc-logo-text span {
   display: none !important;
 }
 
-/* Add Ask Chief branding */
-.kc-logo-text {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--green-500);
-  text-decoration: none;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.kc-logo-subtitle {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-/* Form Styling */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.form-control,
-.pf-c-form-control {
-  width: 100%;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #ffffff;
-  color: var(--text-primary);
-  transition: all 0.2s ease-in-out;
-  box-sizing: border-box;
-  height: 42px !important;
-  line-height: 1.375;
-}
-
-.form-control:focus,
-.pf-c-form-control:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(44, 219, 135, 0.2);
-  padding: 10px 16px;
-}
-
-.form-control::placeholder,
-.pf-c-form-control::placeholder {
-  color: #9ca3af;
-  font-size: 0.875rem;
-}
-
-/* Button Styling - Match Frontend Exactly */
-.btn-primary, 
-#kc-login,
-input[type="submit"].btn-primary,
-input[type="submit"].pf-c-button.pf-m-primary {
-  /* Reset default styles */
-  all: unset;
-  box-sizing: border-box;
-  
-  /* Apply Tailwind-style classes manually since we can't modify HTML */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  
-  /* w-full */
-  width: 100%;
-  
-  /* px-4 py-3 */
-  padding: 0.75rem 1rem;
-  
-  /* rounded-2xl */
-  border-radius: 1rem;
-  
-  /* bg-green-500 */
-  background-color: var(--green-500);
-  
-  /* text-black and centered */
-  color: var(--black);
-  text-align: center;
-  
-  /* font-normal (not bold) */
-  font-weight: 400;
-  
-  /* tracking-wide */
-  letter-spacing: 0.025em;
-  
-  /* transition-colors duration-200 */
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-  
-  /* transform (hover effect) */
-  transform: scale(1);
-  
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 1rem;
-  
-  /* mt-6 spacing handled by parent */
-}
-
-/* Hover and focus states */
-.btn-primary:hover, 
-#kc-login:hover,
-input[type="submit"].btn-primary:hover,
-input[type="submit"].pf-c-button.pf-m-primary:hover {
-  background-color: var(--green-600);
-  transform: scale(1.02);
-}
-
-.btn-primary:focus, 
-#kc-login:focus,
-input[type="submit"].btn-primary:focus,
-input[type="submit"].pf-c-button.pf-m-primary:focus {
-  background-color: var(--green-600);
-  outline: 2px solid var(--green-500);
-  outline-offset: 2px;
-}
-
-.btn-primary:active, 
-#kc-login:active,
-input[type="submit"].btn-primary:active,
-input[type="submit"].pf-c-button.pf-m-primary:active {
-  background-color: var(--green-700);
-  transform: scale(0.98);
-}
-
-/* Add margin-top to button container to match mt-6 */
-#kc-form-buttons {
-  margin-top: 1.5rem; /* mt-6 = 1.5rem */
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-medium);
-}
-
-.btn-secondary:hover {
-  background-color: var(--surface-secondary);
-  color: var(--text-primary);
-  border-color: var(--border-heavy);
-}
-
-/* Links */
-a {
-  color: var(--green-500);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-a:hover {
-  color: var(--green-600);
-  text-decoration: underline;
-}
-
-/* Alert Messages */
-.alert {
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid;
-}
-
-.pf-c-alert {
-  margin-bottom: 20px;
-}
-
-.alert-error {
-  background-color: #fef2f2;
-  border-color: #fecaca;
-  color: #991b1b;
-}
-
-.alert-warning {
-  background-color: #fffbeb;
-  border-color: #fed7aa;
-  color: #92400e;
-}
-
-.alert-success {
-  background-color: var(--green-50);
-  border-color: var(--green-200);
-  color: var(--green-800);
-}
-
-.alert-info {
-  background-color: #eff6ff;
-  border-color: #bfdbfe;
-  color: #1e40af;
-}
-
-/* Checkbox Styling */
-.checkbox input[type="checkbox"] {
-  width: 1rem;
-  height: 1rem;
-  accent-color: var(--green-500);
-  margin-right: 0.5rem;
-}
-
-.checkbox label {
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-/* Social Login Buttons */
-.kc-social-links {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.kc-social-links .kc-social-provider-name {
-  margin-left: 0.5rem;
-}
-
-.zocial {
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin: 0.25rem;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid var(--border-medium);
-  background-color: var(--surface-primary);
-  color: var(--text-primary);
-}
-
-.zocial:hover {
-  background-color: var(--surface-secondary);
-  border-color: var(--border-heavy);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .card-pf {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .login-pf .container {
-    padding-top: 2vh;
-  }
-}
-
-/* Loading states */
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Focus states for accessibility */
-*:focus {
-  outline: 2px solid var(--green-500);
-  outline-offset: 2px;
-}
-
-.btn:focus, .form-control:focus {
-  outline: none;
-}
-
-/* Custom Ask Chief specific styling */
-.kc-brand-container {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.kc-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-/* Make form elements more spacious */
-#kc-form {
-  margin-top: 1.5rem;
-}
-
-#kc-form-buttons {
-  margin-top: 2rem;
-}
-
-/* Remember me styling */
-.login-pf-page-header {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* Remove default Keycloak header styling */
-.login-pf-header h1 {
-  display: none;
-}
-
-/* Custom header for Ask Chief */
+/* Header: cream wordmark + tagline */
 .kc-custom-header {
   text-align: center;
   margin-bottom: 2rem;
   padding: 1rem 0;
 }
 
-.kc-custom-header h1 {
-  color: var(--green-500);
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
+.kc-header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.kc-wordmark {
+  width: 190px;
+  height: auto;
 }
 
 .kc-custom-header p {
@@ -485,25 +101,119 @@ a:hover {
   margin: 0;
 }
 
-/* Header logo (non-fixed, inside header) */
-.kc-header-logo {
-  display: flex;
-  justify-content: center;
+/* Welcome heading */
+.kc-welcome-back {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.kc-welcome-back h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Form */
+#kc-form {
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control,
+.pf-c-form-control {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--cream-faint);
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: var(--surface-input);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  height: 42px !important;
+  line-height: 1.375;
+}
+
+.form-control:focus,
+.pf-c-form-control:focus {
+  outline: none;
+  border-color: var(--cream);
+  box-shadow: 0 0 0 3px rgba(247, 246, 237, 0.12);
+}
+
+.form-control::placeholder,
+.pf-c-form-control::placeholder {
+  color: rgba(247, 246, 237, 0.4);
+  font-size: 0.875rem;
+}
+
+/* Primary button — cream on charcoal */
+.btn-primary,
+#kc-login,
+input[type="submit"].btn-primary,
+input[type="submit"].pf-c-button.pf-m-primary {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 0.75rem;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--surface-submit);
+  color: var(--charcoal);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
-.kc-header-logo img {
-  width: 88px;
-  height: 88px;
+.btn-primary:hover,
+#kc-login:hover,
+input[type="submit"].btn-primary:hover,
+input[type="submit"].pf-c-button.pf-m-primary:hover {
+  background-color: #eae8db;
+  transform: scale(1.02);
 }
 
-/* Remove extra top padding now that header is not fixed */
-.login-pf-page {
-  padding-top: 0;
+.btn-primary:active,
+#kc-login:active,
+input[type="submit"].btn-primary:active,
+input[type="submit"].pf-c-button.pf-m-primary:active {
+  background-color: #dedcce;
+  transform: scale(0.98);
 }
 
-/* Remember me row */
+#kc-form-buttons {
+  margin-top: 1.5rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Links */
+a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--cream);
+  text-decoration: underline;
+}
+
+/* Remember me */
 .kc-remember-me-row {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -515,155 +225,111 @@ a:hover {
   margin: 0;
 }
 
-.kc-remember-me-row .checkbox input[type="checkbox"] {
+.checkbox input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--cream);
   margin-right: 0.5rem;
   margin-left: 0;
-  margin-top: 0;
 }
 
-.kc-remember-me-row .checkbox label {
-  margin: 0;
+.checkbox label {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  font-weight: 400;
-}
-
-.card-pf {
-  margin-top: 0;
-}
-
-.kc-lottie-player {
-  width: 150px;
-  height: 150px;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Hide SVG fallback by default - only show Lottie */
-.kc-lottie-player img {
-  display: none;
-}
-
-/* Show fallback only if Lottie fails to load */
-.kc-lottie-fallback .kc-lottie-player img {
-  display: block;
-}
-
-/* CSS Animations to mimic Lottie */
-@keyframes gentle-bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  40% {
-    transform: translateY(-8px) scale(1.02);
-  }
-  60% {
-    transform: translateY(-4px) scale(1.01);
-  }
-}
-
-@keyframes ship-sway {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(1deg);
-  }
-  75% {
-    transform: rotate(-1deg);
-  }
-}
-
-@keyframes sail-flutter {
-  0%, 100% {
-    transform: scaleX(1);
-  }
-  50% {
-    transform: scaleX(0.95);
-  }
-}
-
-@keyframes glow-pulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(44, 219, 135, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 16px rgba(44, 219, 135, 0.6));
-  }
-}
-
-/* Apply animations */
-.kc-lottie-player svg {
-  animation: gentle-bounce 4s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
-}
-
-.kc-lottie-player svg g {
-  animation: ship-sway 6s ease-in-out infinite;
-  transform-origin: center bottom;
-}
-
-/* Subtle hover effect */
-.kc-lottie-container:hover .kc-lottie-player svg {
-  animation: gentle-bounce 2s ease-in-out infinite, glow-pulse 1.5s ease-in-out infinite;
-}
-
-/* Blink Animation for Loading States */
-@keyframes blink-animation {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-.kc-blink-animation {
-  animation: blink-animation 3s infinite;
-}
-
-/* Welcome back heading */
-.kc-welcome-back {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.kc-welcome-back h2 {
-  font-size: 1.875rem;
-  font-weight: bold;
-  color: var(--text-primary);
   margin: 0;
-  text-align: center;
 }
 
-/* Forgot password link styling */
+/* Forgot password + registration links */
 .kc-forgot-password {
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.kc-forgot-password a {
+.kc-forgot-password a,
+#kc-form-options a,
+#kc-registration a {
   color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 400;
-  text-decoration: none;
 }
 
-.kc-forgot-password a:hover {
-  color: var(--text-primary);
+.kc-forgot-password a:hover,
+#kc-form-options a:hover,
+#kc-registration a:hover {
+  color: var(--cream);
   text-decoration: underline;
 }
 
-/* Back to Login link - consistent with Forgot Password styling */
-#kc-form-options a {
+#kc-registration-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#kc-registration span {
   color: var(--text-secondary);
   font-size: 0.875rem;
-  font-weight: 400;
-  text-decoration: none;
 }
 
-#kc-form-options a:hover {
-  color: var(--text-primary);
-  text-decoration: underline;
+/* Alerts */
+.pf-c-alert,
+.alert {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+}
+
+.alert-error {
+  background-color: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+.alert-warning {
+  background-color: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+}
+
+.alert-success {
+  background-color: rgba(52, 211, 153, 0.12);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #6ee7b7;
+}
+
+.alert-info {
+  background-color: rgba(96, 165, 250, 0.12);
+  border-color: rgba(96, 165, 250, 0.4);
+  color: #93c5fd;
+}
+
+/* Focus visibility */
+*:focus-visible {
+  outline: 2px solid rgba(247, 246, 237, 0.5);
+  outline-offset: 2px;
+}
+
+.btn:focus,
+.form-control:focus {
+  outline: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-pf {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .login-pf .container {
+    padding-top: 3vh;
+  }
+
+  .kc-wordmark {
+    width: 168px;
+  }
 }

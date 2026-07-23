@@ -1,20 +1,11 @@
 <#import "template.ftl" as layout>
 
-<script>window.KC_RESOURCES_PATH = '${url.resourcesPath}';</script>
-
-<!-- Ask Chief Lottie Animation - positioned above everything -->
-<div class="kc-lottie-container-header">
-    <div class="kc-lottie-container">
-        <div class="kc-lottie-player">
-            <img src="${url.resourcesPath}/img/transparent.svg" alt="" style="width: 150px; height: 150px;" />
-        </div>
-    </div>
-</div>
-
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
         <div class="kc-custom-header">
-            <h1>Ask Chief</h1>
+            <div class="kc-header-logo">
+                <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
+            </div>
             <p>AI-Powered Shipping Intelligence Platform</p>
         </div>
     <#elseif section = "form">
