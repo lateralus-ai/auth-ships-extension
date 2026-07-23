@@ -1,20 +1,19 @@
-/* Ask Chief Theme for Keycloak Login — rebrand: cream wordmark on charcoal */
+/* Ask Chief Theme for Keycloak Login — rebrand: dark wordmark on warm light */
 
 /* Work Sans to match Ask Chief branding */
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
 
-/* Brand tokens (sampled from the official askchief.ai mark) */
+/* Brand tokens (sampled from the rebranded app) */
 :root {
-  --charcoal: #232323;          /* page background */
-  --charcoal-elevated: #2c2b28; /* input / raised surfaces */
-  --cream: #f7f6ed;             /* primary text + logo */
-  --cream-muted: rgba(247, 246, 237, 0.64);
-  --cream-faint: rgba(247, 246, 237, 0.14);
+  --page-top: #f4f2ea;      /* warm cream (sidebar tone) */
+  --page-bottom: #fdfdfc;   /* near-white (main panel) */
+  --ink: #1a1a1a;           /* near-black text + logo */
+  --ink-muted: #6b6a66;     /* secondary text */
+  --surface-input: #ffffff;
+  --border-light: #e5e2d8;  /* warm hairline */
 
-  --text-primary: var(--cream);
-  --text-secondary: var(--cream-muted);
-  --surface-input: var(--charcoal-elevated);
-  --surface-submit: var(--cream);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-muted);
 }
 
 /* Global */
@@ -22,18 +21,20 @@
   font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Warm light background — !important to beat the parent keycloak login.css */
+html,
 body,
-.login-pf body {
-  /* Charcoal with a subtle top-center lift for depth */
-  background: radial-gradient(120% 120% at 50% -10%, #2b2a27 0%, var(--charcoal) 45%);
+.login-pf,
+.login-pf body,
+.login-pf-page {
+  background: radial-gradient(130% 130% at 50% -15%, var(--page-top) 0%, var(--page-bottom) 55%) !important;
   color: var(--text-primary);
+}
+
+body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-}
-
-.login-pf {
-  background: transparent;
 }
 
 .login-pf .container {
@@ -76,7 +77,7 @@ body,
   display: none !important;
 }
 
-/* Header: cream wordmark + tagline */
+/* Header: dark wordmark + tagline */
 .kc-custom-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -127,7 +128,7 @@ body,
 .pf-c-form-control {
   width: 100%;
   padding: 10px 16px;
-  border: 1px solid var(--cream-faint);
+  border: 1px solid var(--border-light);
   border-radius: 10px;
   font-size: 1rem;
   background-color: var(--surface-input);
@@ -141,17 +142,17 @@ body,
 .form-control:focus,
 .pf-c-form-control:focus {
   outline: none;
-  border-color: var(--cream);
-  box-shadow: 0 0 0 3px rgba(247, 246, 237, 0.12);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.08);
 }
 
 .form-control::placeholder,
 .pf-c-form-control::placeholder {
-  color: rgba(247, 246, 237, 0.4);
+  color: #9c9a92;
   font-size: 0.875rem;
 }
 
-/* Primary button — cream on charcoal */
+/* Primary button — dark on light */
 .btn-primary,
 #kc-login,
 input[type="submit"].btn-primary,
@@ -164,8 +165,8 @@ input[type="submit"].pf-c-button.pf-m-primary {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
-  background-color: var(--surface-submit);
-  color: var(--charcoal);
+  background-color: var(--ink);
+  color: var(--page-bottom);
   text-align: center;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -180,7 +181,7 @@ input[type="submit"].pf-c-button.pf-m-primary {
 #kc-login:hover,
 input[type="submit"].btn-primary:hover,
 input[type="submit"].pf-c-button.pf-m-primary:hover {
-  background-color: #eae8db;
+  background-color: #333230;
   transform: scale(1.02);
 }
 
@@ -188,7 +189,7 @@ input[type="submit"].pf-c-button.pf-m-primary:hover {
 #kc-login:active,
 input[type="submit"].btn-primary:active,
 input[type="submit"].pf-c-button.pf-m-primary:active {
-  background-color: #dedcce;
+  background-color: #000000;
   transform: scale(0.98);
 }
 
@@ -209,7 +210,7 @@ a {
 }
 
 a:hover {
-  color: var(--cream);
+  color: var(--ink);
   text-decoration: underline;
 }
 
@@ -228,7 +229,7 @@ a:hover {
 .checkbox input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  accent-color: var(--cream);
+  accent-color: var(--ink);
   margin-right: 0.5rem;
   margin-left: 0;
 }
@@ -260,7 +261,7 @@ a:hover {
 .kc-forgot-password a:hover,
 #kc-form-options a:hover,
 #kc-registration a:hover {
-  color: var(--cream);
+  color: var(--ink);
   text-decoration: underline;
 }
 
@@ -284,32 +285,32 @@ a:hover {
 }
 
 .alert-error {
-  background-color: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: #fca5a5;
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
 }
 
 .alert-warning {
-  background-color: rgba(245, 158, 11, 0.12);
-  border-color: rgba(245, 158, 11, 0.4);
-  color: #fcd34d;
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
 }
 
 .alert-success {
-  background-color: rgba(52, 211, 153, 0.12);
-  border-color: rgba(52, 211, 153, 0.4);
-  color: #6ee7b7;
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
 }
 
 .alert-info {
-  background-color: rgba(96, 165, 250, 0.12);
-  border-color: rgba(96, 165, 250, 0.4);
-  color: #93c5fd;
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
 }
 
 /* Focus visibility */
 *:focus-visible {
-  outline: 2px solid rgba(247, 246, 237, 0.5);
+  outline: 2px solid rgba(26, 26, 26, 0.4);
   outline-offset: 2px;
 }
 
