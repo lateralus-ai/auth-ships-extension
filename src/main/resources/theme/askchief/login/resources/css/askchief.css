@@ -66,10 +66,15 @@ body {
   color: var(--text-secondary);
 }
 
-/* Hide stock Keycloak header/branding */
-#kc-header-wrapper,
-.login-pf-header h1 {
+/* Hide only the stock realm-title. NOT `.login-pf-header h1` — Keycloak renders
+   the custom header (our wordmark) inside <h1 id="kc-page-title">, so hiding
+   that h1 would hide the wordmark. */
+#kc-header-wrapper {
   display: none !important;
+}
+
+#kc-page-title {
+  margin: 0;
 }
 
 .kc-logo-text,
@@ -263,6 +268,11 @@ a:hover {
 #kc-registration a:hover {
   color: var(--ink);
   text-decoration: underline;
+}
+
+/* Info/registration footer — brand cream instead of the stock #F0F0F0 */
+#kc-info-wrapper {
+  background-color: #efeedf !important;
 }
 
 #kc-registration-container {
