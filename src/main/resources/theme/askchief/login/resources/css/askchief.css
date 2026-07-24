@@ -82,6 +82,23 @@ body {
   display: none !important;
 }
 
+/* Rebrand announcement bar — full-width black bar pinned to the top of the
+   viewport. Pinned (fixed) because the header section renders inside the card,
+   so it can't span full width in normal flow. */
+.kc-rebrand-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: 0.625rem 1rem;
+}
+
 /* Header: dark wordmark + tagline */
 .kc-custom-header {
   text-align: center;

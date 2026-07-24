@@ -2,6 +2,9 @@
 
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
+        <div class="kc-rebrand-banner">
+            Ask Chief has a new look — same product, nothing has moved.
+        </div>
         <div class="kc-custom-header">
             <div class="kc-header-logo">
                 <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
