@@ -66,6 +66,10 @@
                 <input class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}"
                        name="login" id="kc-login" type="submit" value="${msg("doLogIn")}" />
             </div>
+
+            <p class="kc-otp-help">
+                Lost your device? Ask your administrator to reset two-factor authentication for you.
+            </p>
         </form>
       </div>
     </div>

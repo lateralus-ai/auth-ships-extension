@@ -526,6 +526,15 @@ a:hover {
   font-size: 0.8125rem;
 }
 
+/* Recovery hint — without it a lost phone is a dead end with no next step */
+.kc-otp-help {
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 1.25rem 0 0;
+}
+
 .kc-otp-code-input::placeholder {
   letter-spacing: 0.35em;
   font-size: 1.25rem;
