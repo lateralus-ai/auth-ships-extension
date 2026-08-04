@@ -302,6 +302,242 @@ a:hover {
   font-size: 0.875rem;
 }
 
+/* ---------------------------------------------------------------------------
+   Two-factor (TOTP) — enrolment (login-config-totp.ftl) and code entry
+   (login-otp.ftl). Both reuse the login page's card, header and button styles;
+   only the pieces unique to OTP live here.
+   --------------------------------------------------------------------------- */
+
+.kc-welcome-back .kc-step-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+/* Numbered steps */
+.kc-totp-steps {
+  margin-bottom: 2rem;
+}
+
+.kc-totp-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.kc-totp-step:last-child {
+  margin-bottom: 0;
+}
+
+.kc-totp-step-number {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--page-bottom);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.kc-totp-step-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.kc-totp-step-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0.1875rem 0 0.5rem;
+}
+
+/* Supported authenticator apps, as pills */
+.kc-totp-apps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.kc-totp-apps li {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  background: var(--surface-input);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  padding: 0.25rem 0.625rem;
+}
+
+/* QR code */
+.kc-qr-card {
+  display: inline-flex;
+  padding: 0.75rem;
+  background: var(--surface-input);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+}
+
+#kc-totp-secret-qr-code {
+  display: block;
+  width: 160px;
+  height: 160px;
+}
+
+.kc-totp-switch-mode {
+  margin: 0.75rem 0 0;
+}
+
+.kc-totp-switch-mode a {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.kc-totp-switch-mode a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* Manual-entry secret */
+.kc-totp-secret-wrap {
+  margin: 0 0 0.5rem;
+}
+
+#kc-totp-secret-key {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  word-break: break-all;
+  background: var(--surface-input);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-primary);
+}
+
+.kc-totp-manual-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.kc-totp-manual-details li {
+  margin-bottom: 0.25rem;
+}
+
+/* Field labels — the login page uses placeholders only, but the OTP forms
+   need real labels for the code and device-name fields. */
+.kc-field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.kc-field-label .required {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* The 6-digit code field — wide tracking so the digits read as a code */
+.kc-otp-code-input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.25rem !important;
+  letter-spacing: 0.35em;
+  text-align: center;
+  height: 52px !important;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.kc-otp-code-input::placeholder {
+  letter-spacing: 0.35em;
+  font-size: 1.25rem;
+  color: #cfccc2;
+}
+
+/* Multiple registered devices */
+.kc-otp-credential-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kc-otp-credential-list input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kc-otp-credential-item {
+  display: block;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--surface-input);
+  padding: 0.625rem 0.875rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kc-otp-credential-list input[type="radio"]:checked + .kc-otp-credential-item {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.08);
+}
+
+.kc-otp-credential-list input[type="radio"]:focus-visible + .kc-otp-credential-item {
+  outline: 2px solid rgba(26, 26, 26, 0.4);
+  outline-offset: 2px;
+}
+
+/* Secondary button — the "Cancel" on app-initiated setup. Sits under the
+   primary submit, so it must not look like a second primary action. */
+.kc-button-secondary {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.kc-button-secondary:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* "Sign out from other devices" checkbox that Keycloak renders on enrolment */
+#kc-form-options .checkbox,
+.kc-form-options .checkbox {
+  margin-bottom: 1rem;
+}
+
 /* Alerts */
 .pf-c-alert,
 .alert {
