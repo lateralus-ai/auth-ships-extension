@@ -2,19 +2,30 @@
 
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('totp'); section>
     <#if section = "header">
-        <div class="kc-rebrand-banner">
-            Ask Chief has a new look — same product, nothing has moved.
-        </div>
-        <div class="kc-custom-header">
-            <div class="kc-header-logo">
-                <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
-            </div>
-        </div>
+        <#-- Usually never rendered: template.ftl skips the header section once the
+             user is identified (auth.showUsername()), which is always the case by
+             the time we reach OTP. The brand block therefore lives in "form"
+             below, and the stock #kc-username is hidden and re-rendered there so
+             it sits under the wordmark instead of above it. -->
+        ${msg("doLogIn")}
     <#elseif section = "form">
+    <div class="kc-custom-header">
+        <div class="kc-header-logo">
+            <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
+        </div>
+    </div>
+
     <div class="kc-welcome-back kc-welcome-compact">
         <h2>Two-factor authentication</h2>
         <p class="kc-step-subtitle">Enter the 6-digit code from your authenticator app.</p>
     </div>
+
+    <#if auth?? && auth.attemptedUsername??>
+        <p class="kc-signing-in-as">
+            Signing in as <strong>${auth.attemptedUsername}</strong>
+            &middot; <a href="${url.loginRestartFlowUrl}">Not you?</a>
+        </p>
+    </#if>
 
     <div id="kc-form">
       <div id="kc-form-wrapper">

@@ -410,9 +410,10 @@ a:hover {
 }
 
 /* QR code */
+/* inline-flex so the card hugs the QR instead of stretching the step body and
+   leaving a large empty white panel around it */
 .kc-qr-card {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   padding: 0.875rem;
   background: var(--surface-input);
   border: 1px solid var(--border-light);
@@ -494,9 +495,35 @@ a:hover {
   font-size: 1.25rem !important;
   letter-spacing: 0.35em;
   text-align: center;
+  /* letter-spacing adds a trailing gap after the last glyph, which drags
+     centred text visually left; indent by the same amount to compensate */
+  text-indent: 0.35em;
   height: 52px !important;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+/* Keycloak renders the identified user + restart-login link in <header>, above
+   our brand block. Hidden here and re-rendered inside the form section so the
+   wordmark stays first. */
+#kc-username {
+  display: none;
+}
+
+.kc-signing-in-as {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: -1rem 0 1.75rem;
+}
+
+.kc-signing-in-as strong {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.kc-signing-in-as a {
+  font-size: 0.8125rem;
 }
 
 .kc-otp-code-input::placeholder {
