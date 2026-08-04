@@ -256,7 +256,11 @@ a:hover {
   margin-left: 0;
 }
 
-.checkbox label {
+/* Scoped to remember-me: there the <input> is a SIBLING of the <label>, so a
+   flex label is fine. Keycloak's logoutOtherSessions macro nests the input
+   INSIDE the label and relies on Bootstrap's absolute positioning — flexing
+   that label clips the text. See the #kc-form-options rules further down. */
+.kc-remember-me-row .checkbox label {
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -308,11 +312,39 @@ a:hover {
    only the pieces unique to OTP live here.
    --------------------------------------------------------------------------- */
 
+/* These pages carry more than the login form, so give the card a little more
+   room. :has() is progressive — browsers without it just keep the 400px card. */
+.card-pf:has(#kc-totp-settings-form),
+.card-pf:has(#kc-otp-login-form) {
+  max-width: 440px;
+}
+
+/* "Set up two-factor authentication" is long; at the login page's 1.75rem it
+   wraps mid-phrase in a narrow card. */
+.kc-welcome-compact h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
 .kc-welcome-back .kc-step-subtitle {
   font-size: 0.875rem;
   color: var(--text-secondary);
   margin: 0.5rem 0 0;
   line-height: 1.5;
+}
+
+/* Divider between the instructions and the form */
+.kc-form-divider {
+  border: 0;
+  border-top: 1px solid var(--border-light);
+  margin: 1.75rem 0 1.5rem;
+}
+
+/* Helper line under a field label */
+.kc-field-help {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: -0.25rem 0 0.5rem;
 }
 
 /* Numbered steps */
@@ -379,17 +411,22 @@ a:hover {
 
 /* QR code */
 .kc-qr-card {
-  display: inline-flex;
-  padding: 0.75rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.875rem;
   background: var(--surface-input);
   border: 1px solid var(--border-light);
   border-radius: 12px;
 }
 
+/* Beat the parent theme's `#kc-totp-secret-qr-code { max-width:150px }` — at
+   150px the code is needlessly hard to scan on a phone. */
 #kc-totp-secret-qr-code {
   display: block;
-  width: 160px;
-  height: 160px;
+  width: 168px;
+  height: 168px;
+  max-width: 168px;
+  max-height: 168px;
 }
 
 .kc-totp-switch-mode {
@@ -532,31 +569,81 @@ a:hover {
   color: var(--ink);
 }
 
-/* "Sign out from other devices" checkbox that Keycloak renders on enrolment */
-#kc-form-options .checkbox,
-.kc-form-options .checkbox {
-  margin-bottom: 1rem;
+/* "Sign out from other devices" — rendered by Keycloak's logoutOtherSessions
+   macro, which wraps it in Bootstrap grid columns (float:left) and nests the
+   input inside the label with position:absolute; margin-left:-20px. Left alone
+   that floats over the submit button and clips the label text, so neutralise
+   both here rather than reimplementing the macro. */
+#kc-form-options {
+  float: none;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 1.25rem;
 }
 
-/* Alerts */
+#kc-form-options .checkbox {
+  padding-left: 0;
+  margin: 0;
+}
+
+#kc-form-options .checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+#kc-form-options .checkbox label input[type="checkbox"] {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Alerts — Keycloak renders these as
+   <div class="alert-<type> pf-c-alert pf-m-inline pf-m-<type>">
+     <div class="pf-c-alert__icon"><span class="fa …"></span></div>
+     <span class="pf-c-alert__title kc-feedback-text">…</span>
+   </div>
+   so the icon and title need to be laid out as a row explicitly. */
 .pf-c-alert,
 .alert {
-  border-radius: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.625rem;
   padding: 0.75rem 1rem;
   margin-bottom: 1.5rem;
   border: 1px solid;
+  text-align: left;
+}
+
+.pf-c-alert .pf-c-alert__icon {
+  flex: 0 0 auto;
+  line-height: 1.45;
+}
+
+.pf-c-alert .pf-c-alert__title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .alert-error {
-  background-color: #fef2f2;
-  border-color: #fecaca;
-  color: #991b1b;
+  background-color: #fdf3f2;
+  border-color: #f2d5d2;
+  color: #8f2c22;
 }
 
+/* Warm amber that sits with the cream palette, rather than PatternFly gold */
 .alert-warning {
-  background-color: #fffbeb;
-  border-color: #fde68a;
-  color: #92400e;
+  background-color: #fbf6e9;
+  border-color: #e8dcbb;
+  color: #6d5620;
 }
 
 .alert-success {

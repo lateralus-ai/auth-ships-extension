@@ -11,7 +11,7 @@
             </div>
         </div>
     <#elseif section = "form">
-    <div class="kc-welcome-back">
+    <div class="kc-welcome-back kc-welcome-compact">
         <h2>Two-factor authentication</h2>
         <p class="kc-step-subtitle">Enter the 6-digit code from your authenticator app.</p>
     </div>

@@ -12,7 +12,7 @@
             </div>
         </div>
     <#elseif section = "form">
-    <div class="kc-welcome-back">
+    <div class="kc-welcome-back kc-welcome-compact">
         <h2>Set up two-factor authentication</h2>
         <p class="kc-step-subtitle">Add a second step to your sign-in to keep your account secure.</p>
     </div>
@@ -71,17 +71,14 @@
                 </div>
             </#if>
 
-            <div class="kc-totp-step">
-                <span class="kc-totp-step-number"><#if mode?? && mode = "manual">4<#else>3</#if></span>
-                <div class="kc-totp-step-body">
-                    <p class="kc-totp-step-title">Enter the 6-digit code it shows</p>
-                </div>
-            </div>
         </div>
+
+        <hr class="kc-form-divider" />
 
         <form action="${url.loginAction}" class="${properties.kcFormClass!}" id="kc-totp-settings-form" method="post">
             <div class="${properties.kcFormGroupClass!}">
                 <label for="totp" class="kc-field-label">${msg("authenticatorCode")}</label>
+                <p class="kc-field-help">Enter the 6-digit code your app is showing now.</p>
                 <input type="text" id="totp" name="totp" autocomplete="one-time-code"
                        class="${properties.kcInputClass!} kc-otp-code-input"
                        aria-invalid="<#if messagesPerField.existsError('totp')>true</#if>"
