@@ -706,9 +706,13 @@ a:hover {
   max-width: 440px;
 }
 
+/* Centred as a block under the centred subtitle, bulleted and left-aligned
+   inside — the parent theme strips list markers, so they are put back. */
 .kc-password-rules {
+  display: inline-block;
   margin: 0.5rem 0 0;
   padding-left: 1.125rem;
+  list-style: disc;
   text-align: left;
   font-size: 0.8125rem;
   line-height: 1.5;
@@ -717,12 +721,6 @@ a:hover {
 
 .kc-password-rules li {
   margin: 0.125rem 0;
-}
-
-/* The "Changing the password for …" line sits after the rules, so it needs
-   the usual gap above rather than the negative pull-up the OTP page uses. */
-.card-pf:has(#kc-passwd-update-form) .kc-signing-in-as {
-  margin-top: 1rem;
 }
 
 /* Focus visibility */

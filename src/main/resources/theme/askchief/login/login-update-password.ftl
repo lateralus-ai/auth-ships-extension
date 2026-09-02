@@ -5,22 +5,17 @@
      app's "Change password" menu entry (an application-initiated action) or
      when an admin marks the password as temporary. Upstream base template
      structure, form ids and field names preserved; only the presentation is
-     ours. -->
+     ours. Unlike the OTP entry page, template.ftl DOES render the header here
+     (auth.showUsername() is false for this action), so the brand block lives
+     in the header section, as on the OTP enrolment page. -->
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
     <#if section = "header">
-        <#-- Usually never rendered: template.ftl skips the header section once the
-             user is identified (auth.showUsername()), which is always the case by
-             the time a password is being changed. The brand block therefore lives
-             in "form" below, and the stock #kc-username is hidden and re-rendered
-             there so it sits under the wordmark instead of above it. -->
-        ${msg("updatePasswordTitle")}
-    <#elseif section = "form">
-    <div class="kc-custom-header">
-        <div class="kc-header-logo">
-            <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
+        <div class="kc-custom-header">
+            <div class="kc-header-logo">
+                <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
+            </div>
         </div>
-    </div>
-
+    <#elseif section = "form">
     <div class="kc-welcome-back kc-welcome-compact">
         <h2>Choose a new password</h2>
         <p class="kc-step-subtitle">Your new password must have:</p>
@@ -31,12 +26,6 @@
             <li>no repeat of your last 4 passwords</li>
         </ul>
     </div>
-
-    <#if auth?? && auth.attemptedUsername??>
-        <p class="kc-signing-in-as">
-            Changing the password for <strong>${auth.attemptedUsername}</strong>
-        </p>
-    </#if>
 
     <div id="kc-form">
       <div id="kc-form-wrapper">
