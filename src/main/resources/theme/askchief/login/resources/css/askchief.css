@@ -694,6 +694,37 @@ a:hover {
   color: #1e40af;
 }
 
+/* ---------------------------------------------------------------------------
+   Change password (login-update-password.ftl) — the UPDATE_PASSWORD action.
+   Reuses the login card, brand block, field and button styles; only the rules
+   list is new.
+   --------------------------------------------------------------------------- */
+
+/* The rules list makes this page taller than the login form; same widening
+   the two-factor pages get. */
+.card-pf:has(#kc-passwd-update-form) {
+  max-width: 440px;
+}
+
+.kc-password-rules {
+  margin: 0.5rem 0 0;
+  padding-left: 1.125rem;
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.kc-password-rules li {
+  margin: 0.125rem 0;
+}
+
+/* The "Changing the password for …" line sits after the rules, so it needs
+   the usual gap above rather than the negative pull-up the OTP page uses. */
+.card-pf:has(#kc-passwd-update-form) .kc-signing-in-as {
+  margin-top: 1rem;
+}
+
 /* Focus visibility */
 *:focus-visible {
   outline: 2px solid rgba(26, 26, 26, 0.4);
