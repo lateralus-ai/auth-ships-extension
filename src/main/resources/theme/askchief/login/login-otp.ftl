@@ -34,7 +34,7 @@
 
             <#if otpLogin.userOtpCredentials?size gt 1>
                 <div class="${properties.kcFormGroupClass!}">
-                    <label class="kc-field-label">Choose a device</label>
+                    <label class="kc-field-label">Choose an authenticator</label>
                     <div class="kc-otp-credential-list">
                         <#list otpLogin.userOtpCredentials as otpCredential>
                             <input id="kc-otp-credential-${otpCredential?index}" class="${properties.kcLoginOTPListInputClass!}"
