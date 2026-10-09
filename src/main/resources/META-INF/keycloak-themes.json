@@ -2,5 +2,8 @@
     "themes": [{
         "name": "askchief",
         "types": [ "login" ]
+    }, {
+        "name": "askchief-restricted",
+        "types": [ "login" ]
     }]
 }
