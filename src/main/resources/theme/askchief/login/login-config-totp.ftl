@@ -3,8 +3,6 @@
 
 <@layout.registrationLayout displayRequiredFields=false displayMessage=!messagesPerField.existsError('totp','userLabel'); section>
     <#if section = "header">
-        <#-- No rebrand banner here: it is position:fixed, and this page is tall
-             enough to scroll, so it would sit over the form's content. -->
         <div class="kc-custom-header">
             <div class="kc-header-logo">
                 <img class="kc-wordmark" src="${url.resourcesPath}/img/askchief-wordmark.svg" alt="Ask Chief" />
